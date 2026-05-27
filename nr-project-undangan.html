@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NR Project — Undangan Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --cream-dark: #F0EBE1;
+    --gold: #B8965A;
+    --gold-light: #D4B483;
+    --gold-pale: #F5EDD8;
+    --dark: #2C2416;
+    --mid: #7A6A52;
+    --soft: #A89880;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 3.5rem 1.5rem 2rem;
+    position: relative;
+  }
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .ornament-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold-light);
+  }
+  .ornament-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+  }
+  .headline em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .subhead {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    max-width: 340px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+    opacity: 0.5;
+  }
+  .section-divider span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+  }
+
+  /* CARDS */
+  .cards-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 1rem;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #E8DFD0;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.15s; }
+  .card:nth-child(3) { animation-delay: 0.25s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(184,150,90,0.12);
+  }
+
+  .card.featured {
+    border: 1.5px solid var(--gold);
+  }
+
+  .card-top {
+    padding: 1.4rem 1.5rem 1rem;
+    border-bottom: 1px solid #F0E8DA;
+    position: relative;
+  }
+
+  .tag-popular {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold-pale);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .pkg-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .pkg-tagline {
+    font-size: 12px;
+    color: var(--soft);
+    font-weight: 300;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .price-rp {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 400;
+  }
+  .price-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .price-note {
+    font-size: 11px;
+    color: var(--soft);
+    margin-top: 3px;
+  }
+
+  .card-body {
+    padding: 1.2rem 1.5rem 1.5rem;
+  }
+
+  .feat-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 1.4rem;
+  }
+  .feat-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.4;
+  }
+  .feat-list li::before {
+    content: '✦';
+    color: var(--gold-light);
+    font-size: 10px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .feat-list li strong {
+    color: var(--dark);
+    font-weight: 500;
+  }
+
+  .btn-pesan {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1.5px solid var(--gold-light);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn-pesan:hover {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+  }
+  .card.featured .btn-pesan {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+  }
+  .card.featured .btn-pesan:hover {
+    background: #9A7A3E;
+    border-color: #9A7A3E;
+  }
+
+  /* FITUR SECTION */
+  .fitur-section {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    padding: 0 1.5rem;
+  }
+  .fitur-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--soft);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .fitur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+  }
+  .fitur-item {
+    background: var(--cream-dark);
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .fitur-icon { font-size: 18px; margin-bottom: 5px; }
+  .fitur-name { font-size: 11px; color: var(--mid); line-height: 1.4; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 1.5rem 3rem;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .footer-note {
+    font-size: 12px;
+    color: var(--soft);
+    line-height: 1.8;
+  }
+  .footer-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 9px 20px;
+    border: 1px solid #E8DFD0;
+    border-radius: 30px;
+    font-size: 13px;
+    color: var(--mid);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-wa:hover { background: var(--cream-dark); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-dot"></div>
+    <div class="ornament-line"></div>
+  </div>
+  <p class="brand">NR Project</p>
+  <h1 class="headline">Undangan Digital<br><em>Elegan & Modern</em></h1>
+  <p class="subhead">Undangan website yang siap sebar dalam hitungan jam, dengan tampilan yang berkesan untuk momen spesialmu.</p>
+</header>
+
+<div class="section-divider"><span>❧</span></div>
+
+<div class="cards-wrap">
+
+  <!-- BASIC -->
+  <div class="card">
+    <div class="card-top">
+      <p class="pkg-name">Basic</p>
+      <p class="pkg-tagline">Simpel, bersih, dan siap kirim</p>
+      <div class="price-row">
+        <span class="price-rp">Rp</span>
+        <span class="price-num">75.000</span>
+      </div>
+      <p class="price-note">sekali bayar · aktif 6 bulan</p>
+    </div>
+    <div class="card-body">
+      <ul class="feat-list">
+        <li>Pilih dari <strong>80+ tema</strong> eksklusif</li>
+        <li><strong>RSVP</strong> tamu online</li>
+        <li><strong>Countdown</strong> menuju hari H</li>
+        <li><strong>Galeri foto</strong> pasangan</li>
+        <li>Kirim ucapan & doa</li>
+        <li>Sebar link <strong>tanpa batas</strong></li>
+        <li>Navigasi lokasi acara</li>
+      </ul>
+      <a class="btn-pesan" href="https://wa.me/6285706114856?text=Halo%20NR%20Project%2C%20saya%20ingin%20pesan%20undangan%20paket%20*Basic%20(Rp%2075.000)*%20%F0%9F%99%8F" target="_blank">Pesan Sekarang</a>
+    </div>
+  </div>
+
+  <!-- STANDAR -->
+  <div class="card featured">
+    <div class="card-top">
+      <span class="tag-popular">✦ Terlaris</span>
+      <p class="pkg-name">Standar</p>
+      <p class="pkg-tagline">Pilihan paling banyak dipesan</p>
+      <div class="price-row">
+        <span class="price-rp">Rp</span>
+        <span class="price-num">100.000</span>
+      </div>
+      <p class="price-note">sekali bayar · aktif 6 bulan</p>
+    </div>
+    <div class="card-body">
+      <ul class="feat-list">
+        <li>Semua fitur paket Basic</li>
+        <li><strong>Backsound</strong> musik romantis</li>
+        <li><strong>Love Story</strong> perjalanan kalian</li>
+        <li><strong>Smart Calendar</strong> tambah ke agenda</li>
+        <li><strong>Dompet digital</strong> (angpau online)</li>
+        <li>Revisi data <strong>1 kali</strong></li>
+        <li>Pengerjaan maks. <strong>1×24 jam</strong></li>
+      </ul>
+      <a class="btn-pesan" href="https://wa.me/6285706114856?text=Halo%20NR%20Project%2C%20saya%20ingin%20pesan%20undangan%20paket%20*Standar%20(Rp%20100.000)*%20%F0%9F%99%8F" target="_blank">Pesan Sekarang</a>
+    </div>
+  </div>
+
+  <!-- PREMIUM -->
+  <div class="card">
+    <div class="card-top">
+      <p class="pkg-name">Premium</p>
+      <p class="pkg-tagline">Lengkap untuk momen tak terlupakan</p>
+      <div class="price-row">
+        <span class="price-rp">Rp</span>
+        <span class="price-num">150.000</span>
+      </div>
+      <p class="price-note">sekali bayar · aktif 6 bulan</p>
+    </div>
+    <div class="card-body">
+      <ul class="feat-list">
+        <li>Semua fitur paket Standar</li>
+        <li><strong>Live streaming</strong> acara</li>
+        <li>Tema <strong>adat daerah</strong> (Jawa, Batak, Bugis, dll)</li>
+        <li>Revisi data <strong>3 kali</strong></li>
+        <li><strong>Prioritas</strong> pengerjaan</li>
+        <li>Support via <strong>WhatsApp</strong> langsung</li>
+        <li>Foto & video pada cover</li>
+      </ul>
+      <a class="btn-pesan" href="https://wa.me/6285706114856?text=Halo%20NR%20Project%2C%20saya%20ingin%20pesan%20undangan%20paket%20*Premium%20(Rp%20150.000)*%20%F0%9F%99%8F" target="_blank">Pesan Sekarang</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FITUR SEMUA PAKET -->
+<div class="fitur-section">
+  <p class="fitur-label">Semua paket sudah termasuk</p>
+  <div class="fitur-grid">
+    <div class="fitur-item"><div class="fitur-icon">📱</div><div class="fitur-name">Responsive semua perangkat</div></div>
+    <div class="fitur-item"><div class="fitur-icon">🔗</div><div class="fitur-name">Link sebar tanpa batas</div></div>
+    <div class="fitur-item"><div class="fitur-icon">🎨</div><div class="fitur-name">80+ pilihan tema</div></div>
+    <div class="fitur-item"><div class="fitur-icon">⏰</div><div class="fitur-name">Aktif 6 bulan</div></div>
+    <div class="fitur-item"><div class="fitur-icon">📍</div><div class="fitur-name">Google Maps otomatis</div></div>
+    <div class="fitur-item"><div class="fitur-icon">🔒</div><div class="fitur-name">Aman & terpercaya</div></div>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-brand">NR Project</p>
+  <p class="footer-note">
+    Pengerjaan maksimal 1×24 jam setelah data lengkap diterima.<br>
+    Konsultasi gratis sebelum memesan.
+  </p>
+  <a class="footer-wa" href="https://wa.me/6285706114856?text=Halo%20NR%20Project%2C%20saya%20mau%20konsultasi%20undangan%20digital%20%F0%9F%99%8F" target="_blank">
+    💬 Hubungi via WhatsApp
+  </a>
+</footer>
+
+</body>
+</html>
